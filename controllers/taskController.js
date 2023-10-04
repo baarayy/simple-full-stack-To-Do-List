@@ -8,14 +8,13 @@ const getAllTasks = asyncWrapper(async (req, res) => {
     tasks,
   });
 });
-const createTask = asyncWrapper(async (req, res, next) => {
+const createTask = asyncWrapper(async (req, res) => {
   const { name } = req.body;
   const newTask = await Task.create({ name });
   res.status(200).json({
     message: "Task created successfully!",
     task: newTask,
   });
-  next();
 });
 const getSingleTask = asyncWrapper(async (req, res, next) => {
   const { id: taskID } = req.params;
@@ -26,7 +25,6 @@ const getSingleTask = asyncWrapper(async (req, res, next) => {
   res.status(200).json({
     task,
   });
-  next();
 });
 const updateTask = asyncWrapper(async (req, res, next) => {
   const { id: taskID } = req.params;
@@ -40,7 +38,6 @@ const updateTask = asyncWrapper(async (req, res, next) => {
   res.status(200).json({
     message: "Task has been updated successfully",
   });
-  next();
 });
 const deleteTask = asyncWrapper(async (req, res, next) => {
   const { id: taskID } = req.params;
@@ -51,7 +48,6 @@ const deleteTask = asyncWrapper(async (req, res, next) => {
   res.status(200).json({
     message: "Task has been deleted successfully",
   });
-  next();
 });
 module.exports = {
   getAllTasks,
